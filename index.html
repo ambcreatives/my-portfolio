@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arianne Mae Bernas — Virtual Assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  .hero-profile {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+  animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+.hero-profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+:root {
+  --bg: #faf8f5;
+  --ink: #1a1614;
+  --purple: #7c4dff;
+  --teal: #00bfa5;
+  --coral: #ff6b6b;
+  --amber: #ffb300;
+  --blue: #2979ff;
+  --light-purple: #ede7ff;
+  --light-teal: #e0f7f4;
+  --light-coral: #ffe8e8;
+  --light-amber: #fff8e1;
+  --light-blue: #e3eeff;
+  --border: #e8e4dd;
+  --muted: #9a9490;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 3rem;
+  background: rgba(250,248,245,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 1rem; letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.5rem; }
+.logo-dot { width: 10px; height: 10px; border-radius: 50%; animation: rainbow 4s linear infinite; flex-shrink: 0; }
+@keyframes rainbow { 0%{background:var(--purple)} 25%{background:var(--teal)} 50%{background:var(--coral)} 75%{background:var(--amber)} 100%{background:var(--purple)} }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { font-size: 0.82rem; font-weight: 500; text-decoration: none; color: var(--muted); transition: color 0.2s; }
+.nav-links a:hover { color: var(--ink); }
+.nav-cta { background: var(--purple); color: white; padding: 0.6rem 1.4rem; border-radius: 2rem; font-size: 0.82rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+.nav-cta:hover { background: var(--ink); transform: translateY(-1px); }
+
+/* HERO */
+.hero {
+  min-height: 100vh; padding-top: 76px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding-left: 2rem; padding-right: 2rem; padding-bottom: 4rem;
+  position: relative; overflow: hidden;
+}
+.blob { position: absolute; border-radius: 50%; pointer-events: none; }
+.blob-1 { width: 480px; height: 480px; background: radial-gradient(circle, rgba(124,77,255,0.13) 0%, transparent 70%); top: 5%; left: -8%; animation: bm1 9s ease-in-out infinite; }
+.blob-2 { width: 380px; height: 380px; background: radial-gradient(circle, rgba(0,191,165,0.11) 0%, transparent 70%); bottom: 5%; right: -5%; animation: bm2 11s ease-in-out infinite; }
+.blob-3 { width: 280px; height: 280px; background: radial-gradient(circle, rgba(255,107,107,0.1) 0%, transparent 70%); bottom: 25%; left: 3%; animation: bm1 13s ease-in-out infinite reverse; }
+@keyframes bm1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(35px,25px)} }
+@keyframes bm2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-25px,-20px)} }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: white; border: 1.5px solid var(--border);
+  padding: 0.45rem 1.1rem; border-radius: 2rem;
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 2rem; animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+  position: relative; z-index: 1;
+}
+.epill { padding: 0.2rem 0.6rem; border-radius: 1rem; font-size: 0.7rem; font-weight: 700; }
+.ep-v { background: var(--light-purple); color: var(--purple); }
+.ep-a { background: var(--light-teal); color: var(--teal); }
+
+h1.hero-title {
+  font-family: 'Unbounded', sans-serif; font-weight: 900;
+  font-size: clamp(2.8rem, 6.5vw, 5.8rem); line-height: 0.98;
+  letter-spacing: -0.04em; margin-bottom: 2rem;
+  animation: popIn 0.5s 0.1s cubic-bezier(0.34,1.56,0.64,1) both;
+  position: relative; z-index: 1;
+}
+.w-acc { color: var(--purple); }
+.w-smm { color: var(--teal); }
+.w-adm { background: linear-gradient(90deg, var(--coral), var(--amber)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.hero-sub {
+  font-size: 1.05rem; line-height: 1.8; color: #5a5550; font-weight: 300;
+  max-width: 540px; margin: 0 auto 3rem;
+  animation: popIn 0.5s 0.2s cubic-bezier(0.34,1.56,0.64,1) both;
+  position: relative; z-index: 1;
+}
+.hero-btns {
+  display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+  animation: popIn 0.5s 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+  position: relative; z-index: 1;
+}
+.btn-p { background: var(--purple); color: white; padding: 0.9rem 2rem; border-radius: 3rem; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.4rem; }
+.btn-p:hover { background: #6a3de8; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(124,77,255,0.3); }
+.btn-o { background: white; color: var(--ink); border: 1.5px solid var(--border); padding: 0.9rem 2rem; border-radius: 3rem; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.4rem; }
+.btn-o:hover { border-color: var(--ink); transform: translateY(-2px); }
+
+.hero-stats {
+  display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 3.5rem;
+  animation: popIn 0.5s 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+  position: relative; z-index: 1;
+}
+.hstat {
+  background: white; border: 1.5px solid var(--border); border-radius: 16px;
+  padding: 1.2rem 1.6rem; min-width: 110px; text-align: center;
+}
+.hstat-n { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 1.6rem; letter-spacing: -0.03em; line-height: 1; }
+.hstat-l { font-size: 0.7rem; color: var(--muted); font-weight: 500; margin-top: 0.2rem; }
+
+@keyframes popIn { from{opacity:0;transform:scale(0.92) translateY(12px)} to{opacity:1;transform:scale(1) translateY(0)} }
+
+/* MARQUEE */
+.marquee-wrap { overflow: hidden; border-top: 1.5px solid var(--border); border-bottom: 1.5px solid var(--border); background: var(--ink); padding: 0.85rem 0; }
+.marquee-track { display: flex; gap: 2.5rem; width: max-content; animation: marquee 22s linear infinite; }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.mitem { display: flex; align-items: center; gap: 0.55rem; white-space: nowrap; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+.mdot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+/* SECTION BASE */
+section { padding: 6rem 3rem; }
+.inner { max-width: 1100px; margin: 0 auto; }
+.slabel {
+  display: inline-flex; align-items: center;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 1rem; padding: 0.3rem 0.8rem; border-radius: 1rem;
+}
+.sl-purple { background: var(--light-purple); color: var(--purple); }
+.sl-teal   { background: var(--light-teal); color: #00897b; }
+.sl-coral  { background: var(--light-coral); color: #e53935; }
+.sl-amber  { background: var(--light-amber); color: #b87c00; }
+.sl-blue   { background: var(--light-blue); color: var(--blue); }
+.stitle { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: clamp(1.8rem,3vw,2.6rem); line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 0.8rem; }
+
+/* BENTO SERVICES */
+.services-bg { background: var(--bg); }
+.bento { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 3rem; }
+.bc { border-radius: 20px; padding: 2rem; border: 1.5px solid transparent; transition: transform 0.25s, box-shadow 0.25s; }
+.bc:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+.bc1 { background: var(--light-purple); border-color: #d8ccff; }
+.bc2 { background: var(--light-teal);   border-color: #b0ece4; }
+.bc3 { background: var(--light-coral);  border-color: #ffc4c4; }
+.bc4 { background: var(--light-amber);  border-color: #ffe082; }
+.bc5 { background: var(--light-blue);   border-color: #b3ccff; }
+.bc6 { background: #f3e5f5;             border-color: #d8abf5; }
+.bc-icon { font-size: 2rem; margin-bottom: 1rem; }
+.bc-title { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 0.85rem; margin-bottom: 0.6rem; line-height: 1.3; }
+.bc-desc { font-size: 0.82rem; line-height: 1.7; color: #4a4540; font-weight: 300; }
+.bc-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+.btag { font-size: 0.7rem; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 1rem; background: rgba(255,255,255,0.7); }
+
+/* SKILLS */
+.skills-bg { background: white; }
+.skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+.sitem { margin-bottom: 1.4rem; }
+.srow { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.55rem; }
+.sname { font-size: 0.88rem; font-weight: 600; }
+.spct { font-size: 0.78rem; font-weight: 700; }
+.strack { height: 8px; border-radius: 4px; background: #f0ede8; overflow: hidden; }
+.sfill { height: 100%; border-radius: 4px; transform-origin: left; transform: scaleX(0); animation: bg 1.2s cubic-bezier(0.22,1,0.36,1) forwards; }
+@keyframes bg { to { transform: scaleX(1); } }
+.sf1 { background: linear-gradient(90deg,var(--purple),#9c72ff); }
+.sf2 { background: linear-gradient(90deg,var(--teal),#1de9b6); }
+.sf3 { background: linear-gradient(90deg,var(--coral),#ff8e8e); }
+.sf4 { background: linear-gradient(90deg,var(--amber),#ffd740); }
+.sf5 { background: linear-gradient(90deg,var(--blue),#5c9eff); }
+
+.tools-col h3 { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 0.88rem; margin-bottom: 0.8rem; margin-top: 1.5rem; }
+.tools-col h3:first-child { margin-top: 0; }
+.tpills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+.tpill { padding: 0.4rem 0.85rem; border-radius: 2rem; font-size: 0.76rem; font-weight: 500; border: 1.5px solid; transition: transform 0.15s; cursor: default; }
+.tpill:hover { transform: scale(1.05); }
+.tp1 { background: var(--light-purple); border-color: #d8ccff; color: var(--purple); }
+.tp2 { background: var(--light-teal);   border-color: #b0ece4; color: #00897b; }
+.tp3 { background: var(--light-coral);  border-color: #ffc4c4; color: #e53935; }
+
+/* PROCESS */
+.process-bg { background: var(--ink); }
+.process-bg .stitle { color: white; }
+.psteps { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.2rem; margin-top: 3rem; }
+.pcard { background: #201e1a; border: 1.5px solid #2e2b24; border-radius: 20px; padding: 2rem; transition: background 0.3s; }
+.pcard:hover { background: #2a2720; }
+.pnum { display: inline-block; font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 0.68rem; letter-spacing: 0.1em; padding: 0.28rem 0.65rem; border-radius: 1rem; margin-bottom: 1.3rem; }
+.pn1 { background: rgba(124,77,255,0.2); color: #b39dff; }
+.pn2 { background: rgba(0,191,165,0.15); color: #5ee9d5; }
+.pn3 { background: rgba(255,107,107,0.15); color: #ff9e9e; }
+.pn4 { background: rgba(255,179,0,0.15); color: #ffd24d; }
+.ptitle { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 0.85rem; color: white; margin-bottom: 0.7rem; }
+.pdesc { font-size: 0.82rem; color: #7a746c; line-height: 1.7; font-weight: 300; }
+
+/* WORK */
+.work-bg { background: var(--bg); }
+.wgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 3rem; }
+.wcard { border-radius: 20px; overflow: hidden; background: white; border: 1.5px solid var(--border); transition: transform 0.25s, box-shadow 0.25s; }
+.wcard:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); }
+.wtop { height: 158px; position: relative; display: flex; align-items: center; justify-content: center; }
+.wt1 { background: linear-gradient(135deg,#4a148c,var(--purple)); }
+.wt2 { background: linear-gradient(135deg,#004d40,var(--teal)); }
+.wt3 { background: linear-gradient(135deg,#bf360c,var(--coral)); }
+.wt4 { background: linear-gradient(135deg,#0d47a1,var(--blue)); }
+.wbg { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 2.8rem; color: white; opacity: 0.14; user-select: none; }
+.wchips { position: absolute; bottom: 0.9rem; left: 1rem; display: flex; gap: 0.4rem; }
+.wchip { padding: 0.22rem 0.6rem; border-radius: 1rem; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; background: rgba(255,255,255,0.18); color: white; border: 1px solid rgba(255,255,255,0.25); backdrop-filter: blur(4px); }
+.wbody { padding: 1.4rem; }
+.wtitle { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 0.82rem; margin-bottom: 0.5rem; }
+.wdesc { font-size: 0.82rem; color: #5a5550; line-height: 1.7; font-weight: 300; }
+.wres { margin-top: 0.9rem; padding: 0.65rem 0.9rem; border-radius: 10px; font-size: 0.77rem; font-weight: 600; }
+.wr1 { background: var(--light-purple); color: var(--purple); }
+.wr2 { background: var(--light-teal); color: #00897b; }
+.wr3 { background: var(--light-coral); color: #e53935; }
+.wr4 { background: var(--light-blue); color: var(--blue); }
+
+/* TESTIMONIALS */
+.testi-bg { background: linear-gradient(135deg,#7c4dff 0%,#00bfa5 100%); }
+.testi-bg .stitle { color: white; }
+.testi-bg .slabel { background: rgba(255,255,255,0.18); color: white; }
+.tgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem; margin-top: 3rem; }
+.tcard { background: rgba(255,255,255,0.12); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.22); border-radius: 20px; padding: 2rem; }
+.tstars { font-size: 0.88rem; color: var(--amber); margin-bottom: 1rem; }
+.tquote { font-size: 0.87rem; line-height: 1.75; color: rgba(255,255,255,0.9); font-style: italic; font-weight: 300; margin-bottom: 1.4rem; }
+.tauthor { display: flex; align-items: center; gap: 0.8rem; }
+.tav { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.22); color: white; display: flex; align-items: center; justify-content: center; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 0.7rem; }
+.tname { font-weight: 700; font-size: 0.83rem; color: white; }
+.trole { font-size: 0.7rem; color: rgba(255,255,255,0.58); }
+
+/* PACKAGES */
+.pkg-bg { background: white; }
+.pgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem; margin-top: 3rem; }
+.pkg { border-radius: 20px; padding: 2.5rem 2rem; border: 1.5px solid var(--border); position: relative; transition: transform 0.25s, box-shadow 0.25s; }
+.pkg:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.07); }
+.pkg-hot { background: var(--ink); border-color: transparent; transform: scale(1.03); }
+.pkg-hot:hover { transform: scale(1.03) translateY(-4px); }
+.pbadge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--amber); color: var(--ink); padding: 0.25rem 0.9rem; border-radius: 1rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap; }
+.pname { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 0.88rem; margin-bottom: 0.4rem; }
+.pkg-hot .pname { color: white; }
+.pprice { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 2.2rem; letter-spacing: -0.03em; line-height: 1; margin-bottom: 0.2rem; }
+.pkg-hot .pprice { color: var(--amber); }
+.pper { font-size: 0.78rem; color: var(--muted); margin-bottom: 1.5rem; }
+.pkg-hot .pper { color: #7a746c; }
+.pitems { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 2rem; }
+.pitems li { font-size: 0.82rem; display: flex; align-items: flex-start; gap: 0.5rem; line-height: 1.5; }
+.pkg-hot .pitems li { color: #b0a898; }
+.pi-p li::before { content:'✓'; color: var(--purple); font-weight: 700; flex-shrink: 0; }
+.pi-w li::before { content:'✓'; color: var(--teal); font-weight: 700; flex-shrink: 0; }
+.pi-c li::before { content:'✓'; color: var(--coral); font-weight: 700; flex-shrink: 0; }
+.pbtn { display: block; text-align: center; padding: 0.85rem; border-radius: 2rem; font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+.pb-purple { background: var(--purple); color: white; }
+.pb-purple:hover { background: #6a3de8; }
+.pb-white { background: white; color: var(--ink); }
+.pb-white:hover { background: var(--bg); }
+.pb-out { background: transparent; color: var(--muted); border: 1.5px solid var(--border); }
+.pb-out:hover { border-color: var(--ink); color: var(--ink); }
+
+/* CONTACT */
+.contact-bg { background: var(--bg); }
+.cbox { max-width: 660px; margin: 0 auto; text-align: center; }
+.cemail {
+  display: inline-block; margin-top: 2rem;
+  font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 1.1rem;
+  text-decoration: none;
+  background: linear-gradient(90deg,var(--purple),var(--teal));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(90deg,var(--purple),var(--teal)) 1;
+}
+.clinks { display: flex; justify-content: center; gap: 0.9rem; flex-wrap: wrap; margin-top: 2.5rem; }
+.clink { display: flex; align-items: center; gap: 0.4rem; padding: 0.75rem 1.4rem; border-radius: 2rem; font-size: 0.84rem; font-weight: 600; text-decoration: none; transition: all 0.2s; border: 1.5px solid; }
+.clink:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.07); }
+.cl1 { background: var(--light-purple); border-color: #d8ccff; color: var(--purple); }
+.cl2 { background: var(--light-teal); border-color: #b0ece4; color: #00897b; }
+.cl3 { background: var(--light-coral); border-color: #ffc4c4; color: #e53935; }
+
+/* FOOTER */
+footer { padding: 1.5rem 3rem; border-top: 1.5px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.flogo { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 0.88rem; display: flex; align-items: center; gap: 0.4rem; }
+.fcopy { font-size: 0.75rem; color: var(--muted); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  section { padding: 4rem 1.5rem; }
+  .bento, .skills-layout, .psteps, .wgrid, .tgrid, .pgrid { grid-template-columns: 1fr; }
+  .pkg-hot { transform: none; }
+  .pkg-hot:hover { transform: translateY(-4px); }
+  footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+  <img src="icon-ari.jpg" style="width:30px; height:30px; border-radius:50%; object-fit:cover;">
+  Arianne Mae Bernas
+</div><!-- ← EDIT -->
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">✉ Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="hero-profile">
+  <img src="icon-ari.jpg" alt="Arianne Mae Bernas">
+</div>
+  <div class="hero-eyebrow">
+    <span class="epill ep-v">VA</span>
+    Accounting · Social Media · Admin
+    <span class="epill ep-a">Open to Work</span>
+  </div>
+  <h1 class="hero-title">
+    <span class="w-acc">Books.</span><br>
+    <span class="w-smm">Brand.</span><br>
+    <span class="w-adm">Business.</span>
+  </h1>
+  <p class="hero-sub">
+    Virtual assistant specializing in <strong>accounting/bookkeeping</strong>, <strong>social media management</strong>, and <strong>admin support</strong> — I handle the details so you can focus on growth.
+  </p>
+  <div class="hero-btns">
+    <a href="#packages" class="btn-p">View Packages →</a>
+    <a href="#contact" class="btn-o">📅 Book a Discovery Call</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n" style="color:var(--purple)">2+</div><div class="hstat-l">Years Exp.</div></div>
+    <div class="hstat"><div class="hstat-n" style="color:var(--coral)">3-in-1</div><div class="hstat-l">Specialties</div></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="mitem"><span class="mdot" style="background:var(--purple)"></span>QuickBooks/Xero/Sage Intacct</span>
+    <span class="mitem"><span class="mdot" style="background:var(--teal)"></span>Social Media Management</span>
+    <span class="mitem"><span class="mdot" style="background:var(--coral)"></span>Bookkeeping &amp; Reconciliation</span>
+    <span class="mitem"><span class="mdot" style="background:var(--amber)"></span>Content Creation</span>
+    <span class="mitem"><span class="mdot" style="background:var(--blue)"></span>Payroll Processing</span>
+    <span class="mitem"><span class="mdot" style="background:var(--purple)"></span>Calendar Management</span>
+    <span class="mitem"><span class="mdot" style="background:var(--teal)"></span>Financial Reporting</span>
+    <span class="mitem"><span class="mdot" style="background:var(--coral)"></span>Canva Design</span>
+    <span class="mitem"><span class="mdot" style="background:var(--amber)"></span>Inbox Management</span>
+    <span class="mitem"><span class="mdot" style="background:var(--blue)"></span>Admin &amp; Operations</span>
+    <span class="mitem"><span class="mdot" style="background:var(--purple)"></span>QuickBooks/Xero/Sage Intacct</span>
+    <span class="mitem"><span class="mdot" style="background:var(--teal)"></span>Social Media Strategy</span>
+    <span class="mitem"><span class="mdot" style="background:var(--coral)"></span>Bookkeeping &amp; Reconciliation</span>
+    <span class="mitem"><span class="mdot" style="background:var(--amber)"></span>Content Creation</span>
+    <span class="mitem"><span class="mdot" style="background:var(--blue)"></span>Payroll Processing</span>
+    <span class="mitem"><span class="mdot" style="background:var(--purple)"></span>Calendar Management</span>
+    <span class="mitem"><span class="mdot" style="background:var(--teal)"></span>Financial Reporting</span>
+    <span class="mitem"><span class="mdot" style="background:var(--coral)"></span>Canva Design</span>
+    <span class="mitem"><span class="mdot" style="background:var(--amber)"></span>Inbox Management</span>
+    <span class="mitem"><span class="mdot" style="background:var(--blue)"></span>Admin &amp; Operations</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-bg" id="services">
+  <div class="inner">
+    <div class="slabel sl-purple">Services</div>
+    <h2 class="stitle">Everything your<br>business needs.</h2>
+    <div class="bento">
+      <div class="bc bc1">
+        <div class="bc-icon">📚</div>
+        <div class="bc-title">Bookkeeping</div>
+        <div class="bc-desc">Accurate monthly records, reconciliations, and reports — your finances always audit-ready.</div>
+        <div class="bc-tags"><span class="btag">Reconciliation</span><span class="btag">A/P &amp; A/R</span><span class="btag">Reports</span></div>
+      </div>
+      <div class="bc bc2">
+        <div class="bc-icon">📱</div>
+        <div class="bc-title">Social Media Management</div>
+        <div class="bc-desc">Content calendars, copy, graphics, scheduling, and analytics for consistent brand growth.</div>
+        <div class="bc-tags"><span class="btag">Content</span><span class="btag">Strategy</span><span class="btag">Analytics</span></div>
+      </div>
+      <div class="bc bc3">
+        <div class="bc-icon">⚙️</div>
+        <div class="bc-title">Admin &amp; Operations</div>
+        <div class="bc-desc">Email, calendar, CRM, data entry, and process docs — the invisible work that keeps things running.</div>
+        <div class="bc-tags"><span class="btag">Email Mgmt</span><span class="btag">Scheduling</span><span class="btag">CRM</span></div>
+      </div>
+      <div class="bc bc4">
+        <div class="bc-icon">🧾</div>
+        <div class="bc-title">Payroll &amp; Tax Prep</div>
+        <div class="bc-desc">Payroll processing, tax document organization, and CPA coordination — no missed deadlines.</div>
+        <div class="bc-tags"><span class="btag">Payroll</span><span class="btag">Year-End</span><span class="btag">Compliance</span></div>
+      </div>
+      <div class="bc bc5">
+        <div class="bc-icon">🎨</div>
+        <div class="bc-title">Content Creation</div>
+        <div class="bc-desc">Canva graphics, Reels scripts, captions, and newsletters — on-brand visuals that convert.</div>
+        <div class="bc-tags"><span class="btag">Canva</span><span class="btag">Copywriting</span><span class="btag">Reels</span></div>
+      </div>
+      <div class="bc bc6">
+        <div class="bc-icon">📊</div>
+        <div class="bc-title">Reporting &amp; Analytics</div>
+        <div class="bc-desc">Monthly financial dashboards, SMM performance reports, and data insights to guide your decisions.</div>
+        <div class="bc-tags"><span class="btag">Dashboards</span><span class="btag">KPIs</span><span class="btag">Insights</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-bg" id="skills">
+  <div class="inner">
+    <div class="slabel sl-teal">Expertise</div>
+    <h2 class="stitle">Skills &amp; tools<br>I work with daily.</h2>
+    <div class="skills-layout">
+      <div>
+        <div class="sitem">
+          <div class="srow"><span class="sname">Bookkeeping &amp; Reconciliation</span><span class="spct" style="color:var(--purple)">95%</span></div>
+          <div class="strack"><div class="sfill sf1" style="width:95%;animation-delay:0.05s"></div></div>
+        </div>
+        <div class="sitem">
+          <div class="srow"><span class="sname">QuickBooks, Xero &amp; Sage Intacct</span><span class="spct" style="color:var(--teal)">90%</span></div>
+          <div class="strack"><div class="sfill sf2" style="width:90%;animation-delay:0.15s"></div></div>
+        </div>
+        <div class="sitem">
+          <div class="srow"><span class="sname">Social Media Strategy</span><span class="spct" style="color:var(--coral)">92%</span></div>
+          <div class="strack"><div class="sfill sf3" style="width:92%;animation-delay:0.25s"></div></div>
+        </div>
+        <div class="sitem">
+          <div class="srow"><span class="sname">Content Creation &amp; Canva</span><span class="spct" style="color:var(--amber)">88%</span></div>
+          <div class="strack"><div class="sfill sf4" style="width:88%;animation-delay:0.35s"></div></div>
+        </div>
+        <div class="sitem">
+          <div class="srow"><span class="sname">Admin &amp; Operations</span><span class="spct" style="color:var(--blue)">93%</span></div>
+          <div class="strack"><div class="sfill sf5" style="width:93%;animation-delay:0.45s"></div></div>
+        </div>
+        <div class="sitem">
+          <div class="srow"><span class="sname">Payroll &amp; Tax Support</span><span class="spct" style="color:var(--purple)">85%</span></div>
+          <div class="strack"><div class="sfill sf1" style="width:85%;animation-delay:0.55s"></div></div>
+        </div>
+      </div>
+      <div class="tools-col">
+        <h3>💜 Accounting Tools</h3>
+        <div class="tpills">
+          <span class="tpill tp1">QuickBooks Online</span>
+          <span class="tpill tp1">Xero</span>
+          <span class="tpill tp1">Sage Intacct</span>
+          <span class="tpill tp1">Excel</span>
+          <span class="tpill tp1">Google Sheets</span>
+        </div>
+        <h3>🩵 Social Media Tools</h3>
+        <div class="tpills">
+          <span class="tpill tp2">Canva</span>
+          <span class="tpill tp2">Meta Business Suite</span>
+          <span class="tpill tp2">Later</span>
+          <span class="tpill tp2">Buffer</span>
+          <span class="tpill tp2">Hootsuite</span>
+          <span class="tpill tp2">CapCut</span>
+        </div>
+        <h3>🩷 Admin &amp; Technical Support</h3>
+        <div class="tpills">
+          <span class="tpill tp3">Notion</span>
+          <span class="tpill tp3">Trello</span>
+          <span class="tpill tp3">Slack</span>
+          <span class="tpill tp3">Zoom</span>
+          <span class="tpill tp3">Google Workspace</span>
+          <span class="tpill tp3">Loom</span>
+          <span class="tpill tp3">Freshdesk</span>
+          <span class="tpill tp3">Zapier</span>
+          <span class="tpill tp3">WordPress</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-bg">
+  <div class="inner">
+    <div class="slabel" style="background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.75)">How It Works</div>
+    <h2 class="stitle">Simple process.<br>Real results.</h2>
+    <div class="psteps">
+      <div class="pcard"><div class="pnum pn1">01</div><div class="ptitle">Discovery Call</div><div class="pdesc">Free 30-min call to understand your business, challenges, and what support would make the biggest impact.</div></div>
+      <div class="pcard"><div class="pnum pn2">02</div><div class="ptitle">Custom Proposal</div><div class="pdesc">A tailored scope, timeline, and pricing sent within 24 hours — built around your specific needs.</div></div>
+      <div class="pcard"><div class="pnum pn3">03</div><div class="ptitle">Smooth Onboarding</div><div class="pdesc">Tool access, workflow setup, dedicated channel. You'll feel supported from the very first day.</div></div>
+      <div class="pcard"><div class="pnum pn4">04</div><div class="ptitle">Ongoing Partnership</div><div class="pdesc">Regular check-ins, monthly reports, and a proactive approach — I flag issues before they become costly.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="work-bg" id="work">
+  <div class="inner">
+    <div class="slabel sl-coral">Portfolio</div>
+    <h2 class="stitle">Results that<br>speak for themselves.</h2>
+    <div class="wgrid">
+      <div class="wcard">
+        <div class="wtop wt1"><div class="wbg">Finance</div><div class="wchips"><span class="wchip">Accounting</span><span class="wchip">Sage Intacct</span></div></div>
+        <div class="wbody">
+          <div class="wtitle">Construction Company — Accounting</div>
+          <div class="wdesc">Work for a 7-figure Company, Assisted with Full cycle accounting, and Processed Journal Entries in Sage Intacct.</div>
+          <div class="wres wr1">✦ Workload cut by 60% · Process new upcoming projects more faster</div>
+        </div>
+      </div>
+      <div class="wcard">
+        <div class="wtop wt2"><div class="wbg">Social</div><div class="wchips"><span class="wchip">Instagram</span><span class="wchip">Content</span><span class="wchip">Meta Ads</span></div></div>
+        <div class="wbody">
+          <div class="wtitle">Law Firm — Marketing & IT Manager</div>
+          <div class="wdesc">Managed full IG & Facebook presence including content calendar, Reels scripting, Canva graphics, Paid Ads, and Website Management over 6 months.</div>
+          <div class="wres wr2">✦ Generated Converted Leads· Bookings up 3×</div>
+        </div>
+      </div>
+    
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="pkg-bg" id="packages">
+  <div class="inner">
+    <div class="slabel sl-amber">Pricing</div>
+    <h2 class="stitle">Simple, transparent<br>packages.</h2>
+    <div class="pgrid">
+      <div class="pkg">
+        <div class="pname pi-p">Starter</div>
+        <div class="pprice">$350</div>
+        <div class="pper">/ month · 10 hrs</div>
+        <ul class="pitems pi-p">
+          <li>Monthly bookkeeping (up to 100 transactions)</li>
+          <li>8 social posts & 1 reels/month(1 platform)</li>
+          <li>Basic email management</li>
+          <li>Monthly summary report</li>
+        </ul>
+        <a href="#contact" class="pbtn pb-out">Get Started →</a>
+      </div>
+      <div class="pkg pkg-hot">
+        <div class="pbadge">⚡ Most Popular</div>
+        <div class="pname">Growth</div>
+        <div class="pprice">$700</div>
+        <div class="pper">/ month · 20 hrs</div>
+        <ul class="pitems pi-w">
+          <li>Full bookkeeping + reconciliation</li>
+          <li>16 posts & 3 reels/month across 2 platforms</li>
+          <li>Calendar + inbox management</li>
+          <li>Payroll (up to 5 employees)</li>
+          <li>Content calendar + Canva graphics</li>
+          <li>Monthly analytics report</li>
+        </ul>
+        <a href="#contact" class="pbtn pb-white">Let's Work Together →</a>
+      </div>
+      <div class="pkg">
+        <div class="pname pi-c">Full-Service</div>
+        <div class="pprice">$1,200</div>
+        <div class="pper">/ month · 40 hrs</div>
+        <ul class="pitems pi-c"
+          <li>Everything in Growth, plus:</li>
+          <li>SMM on 3 platforms</li>
+          <li>Payroll (unlimited staff)</li>
+          <li>Full Bookkeeping + Reconciliation</li>
+          <li>SOPs &amp; systems setup</li>
+          <li>Admin Support</li>
+        </ul>
+        <a href="#contact" class="pbtn pb-out">Get Started →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-bg" id="contact">
+  <div class="cbox">
+    <div class="slabel sl-purple" style="margin:0 auto 1rem;width:fit-content">Contact</div>
+    <h2 class="stitle" style="text-align:center">Ready to work<br>together?</h2>
+    <p style="font-size:1rem;line-height:1.8;color:#5a5550;font-weight:300;margin-top:0.8rem">
+      Start with a free 30-minute discovery call — no pressure, no pitch decks. Just a real conversation about how I can help.
+    </p>
+    <!-- ← EDIT YOUR EMAIL -->
+ <div class="clinks">
+      <a href="mailto:slc.bernas@gmail.com" class="clink cl2"> 📩 Email Me</a>
+    </div>
+    <div class="clinks">
+      <a href="https://calendly.com/slc-bernas/30min" class="clink cl3">📅 Book a Call</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo"><span class="logo-dot"></span> Arianne Mae Bernas</div><!-- ← EDIT -->
+  <div class="fcopy">© 2026 · Virtual Assistant Portfolio</div>
+</footer>
+
+</body>
+</html>
